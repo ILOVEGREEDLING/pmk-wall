@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админка ПМК</title>
+    <style>
+        body { background-color: #0f1015; color: #fff; padding: 16px; font-family: sans-serif; max-width: 600px; margin: 0 auto; }
+        .post { background: #181920; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #222; }
+        .btn-approve { background: #2ecc71; color: #fff; padding: 6px 12px; border: none; border-radius: 4px; text-decoration: none; font-size: 13px; display: inline-block; margin-top: 8px; }
+        .btn-delete { background: #e74c3c; color: #fff; padding: 6px 12px; border: none; border-radius: 4px; text-decoration: none; font-size: 13px; display: inline-block; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <h2>Модерация постов (Ждут проверки)</h2>
+    <hr style="border-color: #222; margin: 10px 0;">
+    {% for post in posts %}
+    <div class="post">
+        <p style="color: #888; font-size: 12px;"><b>{{ post.tag }}</b> | {{ post.created_at }}</p>
+        <p style="margin: 8px 0; word-break: break-word;">{{ post.text }}</p>
+        <a href="/approve/{{ post.id }}" class="btn-approve">Опубликовать</a>
+        <a href="/delete/{{ post.id }}" class="btn-delete">Удалить</a>
+    </div>
+    {% else %}
+    <p style="color: #777; margin-top: 20px;">Новых постов на проверку нет 🎉</p>
+    {% endfor %}
+</body>
+</html>

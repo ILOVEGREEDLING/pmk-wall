@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПМК | Анонимная стена</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #0f1015; color: #f1f1f1; padding: 16px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 480px; }
+        h1 { font-size: 24px; margin-bottom: 16px; text-align: center; color: #fff; }
+        
+        .card-form { background: #181920; padding: 16px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        textarea { width: 100%; height: 90px; background: #22242f; border: 1px solid #2f3241; border-radius: 8px; color: #fff; padding: 10px; resize: none; font-size: 14px; margin-bottom: 10px; }
+        textarea:focus { outline: none; border-color: #5865F2; }
+        .form-row { display: flex; justify-content: space-between; align-items: center; }
+        select { background: #22242f; color: #fff; border: 1px solid #2f3241; border-radius: 6px; padding: 6px 10px; font-size: 13px; }
+        button { background: #5865F2; color: #fff; border: none; border-radius: 6px; padding: 8px 16px; font-weight: bold; cursor: pointer; font-size: 14px; }
+        button:hover { background: #4752C4; }
+
+        .post { background: #181920; padding: 14px; border-radius: 12px; margin-bottom: 12px; border: 1px solid #22242f; }
+        .post-header { display: flex; justify-content: space-between; font-size: 12px; color: #8a8d9b; margin-bottom: 8px; }
+        .tag { background: #22242f; color: #a1a8c3; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .post-text { font-size: 14px; line-height: 1.4; word-break: break-word; color: #dcddde; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💬 ПМК Анонимно</h1>
+
+        <div class="card-form">
+            <form action="/add" method="POST">
+                <textarea name="text" placeholder="Напиши что-нибудь... (без жести)" required></textarea>
+                <div class="form-row">
+                    <select name="tag">
+                        <option value="#жиза">#жиза</option>
+                        <option value="#преподы">#преподы</option>
+                        <option value="#ищу_тебя">#ищу_тебя</option>
+                        <option value="#мем">#мем</option>
+                        <option value="#учеба">#учеба</option>
+                    </select>
+                    <button type="submit">Закинуть</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="feed">
+            {% for post in posts %}
+            <div class="post">
+                <div class="post-header">
+                    <span class="tag">{{ post.tag }}</span>
+                    <span>{{ post.created_at }}</span>
+                </div>
+                <div class="post-text">{{ post.text }}</div>
+            </div>
+            {% else %}
+            <p style="text-align: center; color: #666; margin-top: 40px;">Пока пусто. Будь первым, кто закинет кринж! 👀</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
